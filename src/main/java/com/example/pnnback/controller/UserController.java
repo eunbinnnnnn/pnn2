@@ -15,6 +15,7 @@ public class UserController {
 
     @PostMapping("/signup")
     public String signup(@RequestBody UserJoinRequest request) {
+        System.out.println("[signup] request : " + request);
         userService.join(request);
         return "회원가입 완료";
     }
