@@ -1,6 +1,6 @@
 package com.example.pnnback.service;
 
-import com.example.pnnback.domain.User;
+import com.example.pnnback.entity.User;
 import com.example.pnnback.dto.UserJoinRequest;
 import com.example.pnnback.dto.UserLoginRequest;
 import com.example.pnnback.repository.UserRepository;

@@ -1,4 +1,4 @@
-package com.example.pnnback.domain;
+package com.example.pnnback.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
