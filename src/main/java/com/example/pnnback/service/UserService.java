@@ -3,6 +3,7 @@ package com.example.pnnback.service;
 import com.example.pnnback.entity.User;
 import com.example.pnnback.dto.UserJoinRequest;
 import com.example.pnnback.dto.UserLoginRequest;
+import com.example.pnnback.jwt.JwtTokenProvider;
 import com.example.pnnback.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,7 +14,9 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class UserService {
+
     private final UserRepository userRepository;
+    private final JwtTokenProvider jwtTokenProvider;
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public void join(UserJoinRequest req) {
@@ -32,14 +35,13 @@ public class UserService {
 
     public String login(UserLoginRequest req) {
         User user = userRepository.findByEmail(req.getEmail())
-                .orElseThrow(() -> new IllegalArgumentException("사용자 없음"));
+                .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
 
         if (!encoder.matches(req.getPassword(), user.getPassword())) {
-            throw new IllegalArgumentException("비밀번호 틀림");
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
 
-        // 실제론 JWT 토큰을 리턴해야 함
-        return "로그인 성공 (JWT 토큰 자리)";
+        return jwtTokenProvider.createToken(user.getEmail());
     }
 
     public boolean deleteUser(Long userId) {
