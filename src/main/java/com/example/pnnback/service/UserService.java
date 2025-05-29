@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -38,5 +40,14 @@ public class UserService {
 
         // 실제론 JWT 토큰을 리턴해야 함
         return "로그인 성공 (JWT 토큰 자리)";
+    }
+
+    public boolean deleteUser(Long userId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (optionalUser.isPresent()) {
+            userRepository.deleteById(userId);
+            return true;
+        }
+        return false;
     }
 }
