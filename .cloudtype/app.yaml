@@ -1,9 +1,0 @@
-name: pnn2
-app: java@17
-options:
-  ports: 8080
-context:
-  git:
-    url: https://github.com/eunbinnnnnn/pnn2.git
-    branch: eunbin
-  preset: java-springboot
