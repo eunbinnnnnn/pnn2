@@ -1,6 +1,6 @@
 package com.example.pnnback.jwt;
 
-import com.example.pnnback.domain.User;
+import com.example.pnnback.entity.User;
 import com.example.pnnback.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
